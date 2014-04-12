@@ -8,3 +8,8 @@ We are looking for all OF enthusiasts to join us. We will continually run OF wor
 
 
 Special Thanks: This event is supported by Design and Technology, Parsons The New School for Design. 
+  
+  
+  
+  
+NOTE: this repo is designed to be put inside apps folder  
