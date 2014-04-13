@@ -2522,7 +2522,7 @@
 				<key>isa</key>
 				<string>PBXNativeTarget</string>
 				<key>name</key>
-				<string>06_cvBasics_absDiff</string>
+				<string>11_cv_blobDetection</string>
 				<key>productName</key>
 				<string>myOFApp</string>
 				<key>productReference</key>
@@ -2539,7 +2539,7 @@
 				<key>isa</key>
 				<string>PBXFileReference</string>
 				<key>path</key>
-				<string>06_cvBasics_absDiffDebug.app</string>
+				<string>11_cv_blobDetectionDebug.app</string>
 				<key>sourceTree</key>
 				<string>BUILT_PRODUCTS_DIR</string>
 			</dict>

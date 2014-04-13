@@ -3,47 +3,50 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    myImg.loadImage("chuckClose.png");
-    myImg.setImageType(OF_IMAGE_GRAYSCALE);
+    grabber.initGrabber(320,240);
+    colorImage.allocate(320, 240);
+    currFrame.allocate(320, 240);
+    prevFrame.allocate(320, 240);
+    diffImage.allocate(320, 240);
+    diffMHI.allocate(320, 240);
     
-    myImg2.allocate(myImg.width, myImg.height, OF_IMAGE_GRAYSCALE);
-    
-    ofSetWindowShape(myImg.width*2, myImg.height);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    unsigned char * pixelsA = myImg.getPixels();
-    unsigned char * pixelsB = myImg2.getPixels();
+    grabber.update();
     
-    for (int i = 0; i < myImg.width * myImg.height; i++){
+    if (grabber.isFrameNew()){
         
-        if (pixelsA[i] > mouseX/2){
-            pixelsB[i] = 255;
-        } else {
-            pixelsB[i] = 0;
-        }
+        colorImage.setFromPixels(grabber.getPixelsRef());
+        currFrame = colorImage;
         
-        //pixelsB[i] =
+        
+        diffImage.absDiff( currFrame, prevFrame );
+        if(ofGetFrameNum() < 200) diffImage.threshold(50);
+        else diffImage.threshold(mouseX/10);
+        
+        cout << "threshold : " << mouseX/10 << endl;
+        
+        //darken non-movement areas overtime
+        diffMHI -=2;
+        //lighten movement area
+        diffMHI += diffImage;
+        diffMHI.blur(9);
+        
+        prevFrame = currFrame;
     }
-    
-    myImg2.update();
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
-    ofBackground(0);
-    
-    ofSetRectMode(OF_RECTMODE_CORNER);
-    
-    myImg.draw(0,0);
-    myImg2.draw(myImg.width, 0);
-    
-    
+    grabber.draw(0,0);
+    prevFrame.draw(320,0);
+    diffImage.draw(0,240);
+    diffMHI.draw(320,240);
 }
 
 //--------------------------------------------------------------

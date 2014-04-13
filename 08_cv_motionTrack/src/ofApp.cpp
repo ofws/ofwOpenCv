@@ -3,47 +3,56 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    myImg.loadImage("chuckClose.png");
-    myImg.setImageType(OF_IMAGE_GRAYSCALE);
     
-    myImg2.allocate(myImg.width, myImg.height, OF_IMAGE_GRAYSCALE);
+    grabber.initGrabber(320,240);
+    colorImage.allocate(320, 240);
+    currFrame.allocate(320, 240);
+    prevFrame.allocate(320, 240);
+    diffImage.allocate(320, 240);
     
-    ofSetWindowShape(myImg.width*2, myImg.height);
+    player.loadSound("8LJ0wHPxuGeq.128.mp3");
+    player.setLoop(true);
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    unsigned char * pixelsA = myImg.getPixels();
-    unsigned char * pixelsB = myImg2.getPixels();
+    if (ofGetFrameNum() == 200)
+        player.play();
     
-    for (int i = 0; i < myImg.width * myImg.height; i++){
+    
+    grabber.update();
+    
+    if (grabber.isFrameNew()){
         
-        if (pixelsA[i] > mouseX/2){
-            pixelsB[i] = 255;
-        } else {
-            pixelsB[i] = 0;
-        }
+        colorImage.setFromPixels(grabber.getPixelsRef());
+        currFrame = colorImage;
+        currFrame.flagImageChanged();
         
-        //pixelsB[i] =
+        
+        
+        diffImage.absDiff( currFrame, prevFrame );
+        diffImage.threshold(mouseX/10);
+        
+        int nWhitePixels = diffImage.countNonZeroInRegion(0, 0, 320, 240);
+        cout << nWhitePixels << endl;
+        
+        float speed = ofMap(nWhitePixels, 0, 10000, 0.1, 1.5, true);
+        player.setSpeed(speed);
+        
+        prevFrame = currFrame;
     }
-    
-    myImg2.update();
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
-    ofBackground(0);
-    
-    ofSetRectMode(OF_RECTMODE_CORNER);
-    
-    myImg.draw(0,0);
-    myImg2.draw(myImg.width, 0);
-    
-    
+    grabber.draw(0,0);
+    currFrame.draw(320,0);
+    prevFrame.draw(0,240);
+    diffImage.draw(320,240);
 }
 
 //--------------------------------------------------------------

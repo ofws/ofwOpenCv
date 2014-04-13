@@ -3,47 +3,29 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    myImg.loadImage("chuckClose.png");
-    myImg.setImageType(OF_IMAGE_GRAYSCALE);
-    
-    myImg2.allocate(myImg.width, myImg.height, OF_IMAGE_GRAYSCALE);
+	myImg.loadImage("chuckClose.png");
+	myImg.setImageType(OF_IMAGE_GRAYSCALE);
+	myImgCv.allocate(myImg.width, myImg.height);
     
     ofSetWindowShape(myImg.width*2, myImg.height);
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    unsigned char * pixelsA = myImg.getPixels();
-    unsigned char * pixelsB = myImg2.getPixels();
-    
-    for (int i = 0; i < myImg.width * myImg.height; i++){
-        
-        if (pixelsA[i] > mouseX/2){
-            pixelsB[i] = 255;
-        } else {
-            pixelsB[i] = 0;
-        }
-        
-        //pixelsB[i] =
-    }
-    
-    myImg2.update();
-    
+	myImgCv.setFromPixels(myImg.getPixelsRef());
+    // blur function need odd number to operate,,,
+    if (counter == 1 || counter == 2) myImgCv.blur( MAX((mouseY/10) * 2 + 1, 1));
+    if (counter == 0 || counter == 2) myImgCv.threshold(mouseX/2);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
-    ofBackground(0);
-    
-    ofSetRectMode(OF_RECTMODE_CORNER);
-    
-    myImg.draw(0,0);
-    myImg2.draw(myImg.width, 0);
-    
-    
+	ofSetColor(255, 255, 255);
+	myImg.draw(0,0);
+	myImgCv.draw(myImg.width, 0);
 }
 
 //--------------------------------------------------------------
@@ -68,7 +50,8 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    counter++;
+    counter%=3;
 }
 
 //--------------------------------------------------------------
