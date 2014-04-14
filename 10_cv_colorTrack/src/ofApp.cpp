@@ -27,7 +27,7 @@ void ofApp::setup(){
 	sat = 0;
 	bri = 0;
     
-    
+    //UI
     hueFader.set(660, 20, 255, 20);
     satFader.set(660, 60, 255, 20);
     briFader.set(660, 100, 255, 20);
@@ -101,7 +101,7 @@ void ofApp::draw(){
     
     
     
-    
+    //UI
     ofSetColor(255);
     ofRect(hueFader);
     ofRect(satFader);
@@ -136,6 +136,7 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
     
+    //UI
     if(hueFader.inside(x, y)) hueRange = x - hueFader.x;
     if(satFader.inside(x, y)) satRange = x - satFader.x;
     if(briFader.inside(x, y)) briRange = x - briFader.x;
@@ -144,6 +145,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     
+    //color picking
 	if (x >= 0 && x < 320 && y >= 0 && y < 240){
 		int pixel = y * 320 + x;
 		hue = hueImage.getPixels()[pixel];
@@ -152,7 +154,7 @@ void ofApp::mousePressed(int x, int y, int button){
 		
 	}
     
-    
+    //UI
     if(hueFader.inside(x, y)) hueRange = x - hueFader.x;
     if(satFader.inside(x, y)) satRange = x - satFader.x;
     if(briFader.inside(x, y)) briRange = x - briFader.x;

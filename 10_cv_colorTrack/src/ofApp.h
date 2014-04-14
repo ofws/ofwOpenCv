@@ -40,9 +40,9 @@ class ofApp : public ofBaseApp{
         int satRange;
         int briRange;
     
+        //UI
         ofRectangle hueFader;
         ofRectangle satFader;
         ofRectangle briFader;
-        ofRectangle thresholdFader;
     
 };

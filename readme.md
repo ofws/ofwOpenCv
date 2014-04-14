@@ -11,5 +11,10 @@ Special Thanks: This event is supported by Design and Technology, Parsons The Ne
   
   
   
+derived from :  
+https://github.com/ofZach/sfpc_image_cv    
+https://github.com/ofZach/avsys2012  
   
-NOTE: this repo is designed to be put inside apps folder  
+
+
+NOTE: this repo is designed to be put inside 'apps' folder  
