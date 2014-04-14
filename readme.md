@@ -1,4 +1,5 @@
 #openFrameworks workshop - Computer Vision
+![poster](http://tothong.com/files/cvworkshopposter.jpg "poster")
 http://www.meetup.com/openFrameworks/events/175895252/  
 
 Visual interpretation and spectatorship was once limited to organic beings with eyes. What is going on with the current world where computer with camera is now able to simulate and automate that complex task.    
