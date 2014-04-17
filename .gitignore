@@ -1,64 +1,107 @@
-# Some general ignore patterns
-build/
-obj/
+#########################
+# openFrameworks patterns
+#########################
+
+# build files
+openFrameworks.a
+openFrameworksDebug.a
+openFrameworksUniversal.a
+libs/openFrameworksCompiled/lib/*/*
+!libs/openFrameworksCompiled/lib/*/.gitkeep
+
+# rule to avoid non-official addons going into git
+# see addons/.gitignore
+addons/*
+
+# rule to avoid non-official apps going into git
+# see apps/.gitignore
+apps/*
+
+# also, see examples/.gitignore
+
+#########################
+# general
+#########################
+
+[Bb]uild/
+[Oo]bj/
 *.o
-Debug*/
-Release*/
+[Dd]ebug*/
+[Rr]elease*/
 *.mode*
 *.app/
 *.pyc
 .svn/
+*.log
+*.cpp.eep
+*.cpp.elf
+*.cpp.hex
 
+#########################
+# IDE
+#########################
 
-#XCode
+# XCode
 *.pbxuser
 *.perspective
 *.perspectivev3
 *.mode1v3
 *.mode2v3
-#XCode 4
+# XCode 4
 xcuserdata
 *.xcworkspace
 
-#Code::Blocks
+# Code::Blocks
 *.depend
 *.layout
 
-#Visual Studio
+# Visual Studio
 *.sdf
 *.opensdf
 *.suo
+*.pdb
+*.ilk
+*.aps
 ipch/
+*.exe
+*.exp
+*.lib
+*.dll
 
-#Eclipse
+# Eclipse
 .metadata
 local.properties
 .externalToolBuilders
 
+#########################
+# operating system
+#########################
 
-# OS-specific ignore patterns
-
-#Linux
+# Linux
 *~
 # KDE
 .directory
+.AppleDouble
 
-#OSX
+# OSX
 .DS_Store
 *.swp
 *~.nib
 # Thumbnails
 ._*
 
-#Windows
+# Windows
 # Windows image file caches
 Thumbs.db
 # Folder config file
 Desktop.ini
 
-#Android
+# Android
 .csettings
 /libs/openFrameworksCompiled/project/android/paths.make
 
-# Miscellaneous
+#########################
+# miscellaneous
+#########################
+
 .mailmap
